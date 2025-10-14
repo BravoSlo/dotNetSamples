@@ -1,0 +1,29 @@
+﻿@page "/"
+@model si.gapi.samples.serverSentEvents.client.ui.Index
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>si.gapi.samples.serverSentEvents.client</title>
+</head>
+<body>
+<div>
+    Here are live person updates:
+    <div>
+        <ul id="persons">
+        </ul>
+    </div>
+</div>
+<script>
+    const sseEventList = document.getElementById('persons');
+    const sseSource = new EventSource('http://localhost:50170/sse');
+    sseSource.addEventListener('person', event => {
+        console.log(`Received ${event.data}`);
+        const li = document.createElement('li');
+        const data = JSON.parse(event.data);
+        li.textContent = `New checkin ${data.name} at ${data.time} from ${data.location}`;
+        sseEventList.appendChild(li);
+    });
+</script>
+</body>
+</html>
