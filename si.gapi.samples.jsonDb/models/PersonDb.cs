@@ -13,7 +13,8 @@ public class PersonDb : EfBaseDb<PersonDb> {
 	public int? age { get; set; }
 	
 	public Address addressPrimary { get; set; } = new();
-	public List<Address> addressList { get; set; } = new();
+	public List<Address> addressListOne { get; set; } = new();
+	public List<Address> addressListTwo { get; set; } = new();
 	#endregion
 	#region -- model builder --
 	public override void OnModelCreating(ModelBuilder modelBuilder) {
@@ -21,7 +22,8 @@ public class PersonDb : EfBaseDb<PersonDb> {
 		modelBuilder.Entity<PersonDb>().HasIndex(i => new { i.firstName, i.lastName });
 		modelBuilder.Entity<PersonDb>()
 		            .OwnsOne(p => p.addressPrimary, ap => { ap.ToJson(); })
-		            .OwnsMany(p => p.addressList, al => { al.ToJson(); });
+		            .OwnsMany(p => p.addressListOne, al1 => { al1.ToJson(); })
+		            .OwnsMany(p => p.addressListTwo, al2 => { al2.ToJson(); });
 	}
 	#endregion
 	
