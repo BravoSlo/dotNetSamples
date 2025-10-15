@@ -1,0 +1,1 @@
+dotnet-ef migrations add JsonDbCtx_001 -c si.gapi.samples.jsonDb.context.JsonDbCtx -o context/migrations/
