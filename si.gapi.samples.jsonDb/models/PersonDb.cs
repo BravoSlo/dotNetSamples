@@ -13,6 +13,7 @@ public class PersonDb : EfBaseDb<PersonDb> {
 	public int? age { get; set; }
 	
 	public Address addressPrimary { get; set; } = new();
+	[NotMapped]
 	public List<Address> addressListOne { get; set; } = new();
 	public List<Address> addressListTwo { get; set; } = new();
 	#endregion
